@@ -12,16 +12,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score, f1_score
 #%%
 # 데이터 전처리
-with open('data.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
-df_data = pd.DataFrame(data)
-df_data['label'] = 0
+df_data = pd.read_excel('ko-eng_data.xlsx')
+df_data = df_data.sample(frac=0.1, random_state=42)
+
+df_data = df_data[['한국어', '영어검수']].astype(str)
+df_data.columns = ['한국어', '영어']
+df_data['error'] = 0
 
 with open('error_data.json', 'r', encoding='utf-8') as f:
     error_data = json.load(f)
 df_error = pd.DataFrame(error_data)
-df_error['label'] = 1
-#%%
+df_error.columns = ['한국어', '영어', 'error']
+df_error['error'] = 1
+# %%
 # 데이터셋 분할
 data_train_df, data_test_df = train_test_split(df_data, test_size=0.2, random_state=42)
 data_train_df, data_val_df = train_test_split(data_train_df, test_size=0.2, random_state=42)
@@ -45,11 +48,11 @@ class TextDataset(Dataset):
         self.labels = []
 
         for _, row in df.iterrows():
-            source_tokens = tokenizer_ko.encode(row['source'], add_special_tokens=True, max_length=128, truncation=True)
-            target_tokens = tokenizer_en.encode(row['target'], add_special_tokens=True, max_length=128, truncation=True)
+            source_tokens = tokenizer_ko.encode(row['한국어'], add_special_tokens=True, max_length=128, truncation=True)
+            target_tokens = tokenizer_en.encode(row['영어'], add_special_tokens=True, max_length=128, truncation=True)
             self.source_ids.append(source_tokens)
             self.target_ids.append(target_tokens)
-            self.labels.append(row['label'])
+            self.labels.append(row['error'])
 
     def __len__(self):
         return len(self.labels)
@@ -86,7 +89,7 @@ model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-ca
 optimizer = optim.Adam(model.parameters(), lr=2e-5)
 criterion = nn.CrossEntropyLoss()
 
-epoch_size = 15
+epoch_size = 2
 
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epoch_size)
 
@@ -127,8 +130,8 @@ with torch.no_grad():
         test_y_true.extend(labels.tolist())
         test_y_pred.extend(output.logits.argmax(1).tolist())
 
-precision = precision_score(test_y_true, test_y_pred)
-f1 = f1_score(test_y_true, test_y_pred)
+precision = precision_score(test_y_true, test_y_pred, zero_division=1)
+f1 = f1_score(test_y_true, test_y_pred, zero_division=1)
 
 print(f'Test Loss={test_loss/len(test_loader)}, Test Accuracy={test_accuracy/len(test_loader)}')
 print(f'Precision: {precision:.4f}, F1 Score: {f1:.4f}')
@@ -143,7 +146,6 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 import torch.nn as nn
 
-# 모델 불러오기
 model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
 model.load_state_dict(torch.load('./nlp_model'))
 tokenizer_ko = BertTokenizer.from_pretrained('bert-base-multilingual-cased')

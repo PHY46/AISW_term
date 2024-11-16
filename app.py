@@ -38,3 +38,5 @@ target_sentence = st.text_input("Enter an English sentence:", "")
 if st.button("Check"):
     result = check_sentence_similarity(source_sentence, target_sentence)
     st.write(result)
+
+# streamlit run app.py --server.port 20000
