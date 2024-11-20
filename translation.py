@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 import pandas as pd
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import BertTokenizer, BertForSequenceClassification, EncoderDecoderModel
 import torch
 from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
@@ -10,6 +10,7 @@ from torch.nn.utils.rnn import pad_sequence
 import torch.optim as optim
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_score, f1_score
+from tokenizers import Tokenizer, models, trainers, pre_tokenizers, decoders
 #%%
 # 데이터 전처리
 df_data = pd.read_excel('ko-eng_data.xlsx')
@@ -37,41 +38,57 @@ train_df = pd.concat([data_train_df, error_train_df], ignore_index=True)
 val_df = pd.concat([data_val_df, error_val_df], ignore_index=True)
 test_df = pd.concat([data_test_df, error_test_df], ignore_index=True)
 # %%
-# 토크나이저 및 임베딩
-tokenizer_ko = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
-tokenizer_en = BertTokenizer.from_pretrained('bert-base-uncased')
+# BPE 토크나이저 정의 및 학습
+tokenizer_ko = Tokenizer(models.BPE())
+tokenizer_en = Tokenizer(models.BPE())
+
+tokenizer_ko.pre_tokenizer = pre_tokenizers.ByteLevel()
+tokenizer_en.pre_tokenizer = pre_tokenizers.ByteLevel()
+
+tokenizer_ko.decoder = decoders.ByteLevel()
+tokenizer_en.decoder = decoders.ByteLevel()
+
+trainer_ko = trainers.BpeTrainer(special_tokens=["<pad>", "<unk>", "<s>", "</s>"])
+tokenizer_ko.train_from_iterator(df_data['한국어'].tolist(), trainer=trainer_ko)
+
+trainer_en = trainers.BpeTrainer(special_tokens=["<pad>", "<unk>", "<s>", "</s>"])
+tokenizer_en.train_from_iterator(df_data['영어'].tolist(), trainer=trainer_en)
 
 class TextDataset(Dataset):
     def __init__(self, df):
         self.source_ids = []
-        self.target_ids = []
         self.labels = []
+        self.token_type_ids = []
 
         for _, row in df.iterrows():
-            source_tokens = tokenizer_ko.encode(row['한국어'], add_special_tokens=True, max_length=128, truncation=True)
-            target_tokens = tokenizer_en.encode(row['영어'], add_special_tokens=True, max_length=128, truncation=True)
-            self.source_ids.append(source_tokens)
-            self.target_ids.append(target_tokens)
+            source_encoding = tokenizer_ko.encode(row['한국어'], add_special_tokens=True)
+            target_encoding = tokenizer_en.encode(row['영어'], add_special_tokens=True)
+
+            type_ids = [0] * len(source_encoding.ids) + [1] * len(target_encoding.ids)
+            self.token_type_ids.append(type_ids)
+
+            combined_tokens = source_encoding.ids + target_encoding.ids
+            self.source_ids.append(combined_tokens)
             self.labels.append(row['error'])
 
     def __len__(self):
         return len(self.labels)
 
     def __getitem__(self, idx):
-        return self.source_ids[idx], self.target_ids[idx], self.labels[idx]
+        return self.source_ids[idx], self.token_type_ids[idx], self.labels[idx]
 
 def collate_fn(batch):
     source_ids = [item[0] for item in batch]
-    target_ids = [item[1] for item in batch]
+    token_type_ids = [item[1] for item in batch]
     labels = [item[2] for item in batch]
 
-    max_len = max(len(x) for x in source_ids)
-    source_ids_padded = [torch.nn.functional.pad(torch.tensor(x), (0, max_len - len(x)), value=0) for x in source_ids]
+    max_len_source = max(len(x) for x in source_ids)
+    source_ids_padded = [torch.nn.functional.pad(torch.tensor(x), (0, max_len_source - len(x)), value=0) for x in source_ids]
 
-    max_len = max(len(x) for x in target_ids)
-    target_ids_padded = [torch.nn.functional.pad(torch.tensor(x), (0, max_len - len(x)), value=0) for x in target_ids]
+    max_len_token_type = max(len(x) for x in token_type_ids)
+    token_type_ids_padded = [torch.nn.functional.pad(torch.tensor(x), (0, max_len_token_type - len(x)), value=0) for x in token_type_ids]
 
-    return torch.stack(source_ids_padded), torch.stack(target_ids_padded), torch.tensor(labels)
+    return torch.stack(source_ids_padded), torch.stack(token_type_ids_padded), torch.tensor(labels)
 
 # %%
 # DataLoader 생성
@@ -89,15 +106,16 @@ model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-ca
 optimizer = optim.Adam(model.parameters(), lr=2e-5)
 criterion = nn.CrossEntropyLoss()
 
-epoch_size = 2
+epoch_size = 1
 
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epoch_size)
 
 for epoch in range(epoch_size):
     model.train()
-    for source_ids, target_ids, labels in train_loader:
+    for source_ids, token_type_ids, labels in train_loader:
         optimizer.zero_grad()
-        output = model(input_ids=source_ids, attention_mask=(source_ids > 0).float(), labels=labels)
+        attention_mask = (source_ids > 0).float()
+        output = model(input_ids=source_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
         loss = output.loss
         loss.backward()
         optimizer.step()
@@ -106,8 +124,9 @@ for epoch in range(epoch_size):
     val_loss = 0
     val_accuracy = 0
     with torch.no_grad():
-        for source_ids, target_ids, labels in val_loader:
-            output = model(input_ids=source_ids, attention_mask=(source_ids > 0).float(), labels=labels)
+        for source_ids, token_type_ids, labels in val_loader:
+            attention_mask = (source_ids > 0).float()
+            output = model(input_ids=source_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
             val_loss += output.loss.item()
             val_accuracy += (output.logits.argmax(1) == labels).float().mean().item()
 
@@ -130,80 +149,88 @@ with torch.no_grad():
         test_y_true.extend(labels.tolist())
         test_y_pred.extend(output.logits.argmax(1).tolist())
 
+# Precision 및 F1 Score 계산
 precision = precision_score(test_y_true, test_y_pred, zero_division=1)
 f1 = f1_score(test_y_true, test_y_pred, zero_division=1)
 
 print(f'Test Loss={test_loss/len(test_loader)}, Test Accuracy={test_accuracy/len(test_loader)}')
 print(f'Precision: {precision:.4f}, F1 Score: {f1:.4f}')
-
 # %%
 # 모델 저장
-torch.save(model.state_dict(), './nlp_model')
+torch.save(model.state_dict(), './translation_model')
+# %%
+# Encoder-Decoder 모델 로드
+model = EncoderDecoderModel.from_encoder_decoder_pretrained(
+    'bert-base-multilingual-cased', 'bert-base-multilingual-cased'
+)
+tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
+
+# 데이터셋 수정
+class TextCorrectionDataset(Dataset):
+    def __init__(self, df, tokenizer, max_length=128):
+        self.tokenizer = tokenizer
+        self.inputs = df['한국어'].tolist()
+        self.targets = df['영어'].tolist()
+        self.max_length = max_length
+
+    def __len__(self):
+        return len(self.inputs)
+
+    def __getitem__(self, idx):
+        input_text = self.inputs[idx]
+        target_text = self.targets[idx]
+
+        input_encodings = self.tokenizer(
+            input_text, truncation=True, padding="max_length", max_length=self.max_length, return_tensors="pt"
+        )
+        target_encodings = self.tokenizer(
+            target_text, truncation=True, padding="max_length", max_length=self.max_length, return_tensors="pt"
+        )
+
+        return {
+            "input_ids": input_encodings["input_ids"].squeeze(),
+            "attention_mask": input_encodings["attention_mask"].squeeze(),
+            "labels": target_encodings["input_ids"].squeeze(),
+        }
+
+# 학습 프로세스
+train_dataset = TextCorrectionDataset(train_df, tokenizer)
+train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True)
+
+optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5)
+model.train()
+
+epoch_size = 1
+
+for epoch in range(epoch_size):
+    for batch in train_loader:
+        output = model(input_ids=source_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
+        loss = output.loss
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+
+# 모델 저장
+torch.save(model.state_dict(), "./correction_model.pt")
 
 # %%
-# 모델 불러오기
-from transformers import BertTokenizer, BertForSequenceClassification
-import torch
-import torch.nn as nn
+# 모델 평가
+model.eval()
+test_loss = 0
+test_accuracy = 0
+test_y_true = []
+test_y_pred = []
+with torch.no_grad():
+    for source_ids, target_ids, labels in test_loader:
+        output = model(input_ids=source_ids, attention_mask=(source_ids > 0).float(), labels=labels)
+        test_loss += output.loss.item()
+        test_accuracy += (output.logits.argmax(1) == labels).float().mean().item()
+        test_y_true.extend(labels.tolist())
+        test_y_pred.extend(output.logits.argmax(1).tolist())
 
-model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
-model.load_state_dict(torch.load('./nlp_model'))
-tokenizer_ko = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
-tokenizer_en = BertTokenizer.from_pretrained('bert-base-uncased')
-# %%
-# 사용자 입력 처리
-def check_sentence_similarity(source_sentence, target_sentence):
-    source_tokens = tokenizer_ko.encode(source_sentence, add_special_tokens=True, max_length=128, truncation=True)
-    target_tokens = tokenizer_en.encode(target_sentence, add_special_tokens=True, max_length=128, truncation=True)
-    output = model(input_ids=torch.tensor([source_tokens]), attention_mask=(torch.tensor([source_tokens]) > 0).float(), labels=torch.tensor([0]))
-    similarity_score = nn.functional.softmax(output.logits, dim=1)[0][0].item()
-    #print(similarity_score)
-    if similarity_score > 0.5:
-        return "The sentence has no errors."
-    else:
-        return "The sentence has errors."
-# %%
-# 사용자 입력 받기
-#source_sentence = input("한국어 문장을 입력하세요: ")
-#target_sentence = input("영어 문장을 입력하세요: ")
+# Precision 및 F1 Score 계산
+precision = precision_score(test_y_true, test_y_pred, zero_division=1)
+f1 = f1_score(test_y_true, test_y_pred, zero_division=1)
 
-#check_sentence_similarity(source_sentence, target_sentence)
-# %%
-# -*- coding: utf-8 -*-
-import streamlit as st
-from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
-import torch
-import torch.nn as nn
-
-st.title("Sentence Similarity Checker")
-
-# Get user input
-source_sentence = st.text_area("Enter a Korean sentence:", "")
-
-model_name = "bert-base-multilingual-cased"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name)
-
-# Check sentence similarity and display the result
-if st.button("Check"):
-    if source_sentence:
-        # Tokenize the input sentence
-        input_ids = tokenizer.encode(source_sentence, return_tensors='pt')
-
-        # Pass the input through the model
-        output = model(input_ids)[0]
-
-        # Get the similarity score
-        similarity_score = nn.functional.softmax(output, dim=1)[0][0].item()
-
-        if similarity_score > 0.5:
-            result = "The sentence has no errors."
-        else:
-            result = "The sentence has errors."
-
-        st.write(result)
-
-
-# %%
-#streamlit run translation.py
-# %%
+print(f'Test Loss={test_loss/len(test_loader)}, Test Accuracy={test_accuracy/len(test_loader)}')
+print(f'Precision: {precision:.4f}, F1 Score: {f1:.4f}')
