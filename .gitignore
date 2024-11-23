@@ -1,2 +1,5 @@
-correction_model.pt
-translation_model
+/correction_model.pt
+/translation_model
+/data
+/model2
+/tokenizer2

@@ -2,14 +2,15 @@
 import streamlit as st
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # 모델과 토크나이저 로드
 translation_model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
 translation_model.load_state_dict(torch.load('./translation_model', map_location=torch.device('cpu')))
 translation_model.eval()
 
-correction_model = torch.load('./correction_model.pt', map_location=torch.device('cpu'))
-correction_model.eval()
+correction_model = AutoModelForSeq2SeqLM.from_pretrained('correction_model')
+correction_tokenizer = AutoTokenizer.from_pretrained('correction_tokenizer')
 
 tokenizer_ko = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 tokenizer_en = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -39,20 +40,12 @@ if st.button("Check"):
         if similarity_score < 0.3:
             result = "The sentence has no errors."
         else:
+            inputs = correction_tokenizer(source_sentence, return_tensors="pt", padding=True, max_length=64, truncation=True)
+
             with torch.no_grad():
-                encoder_output = correction_model.encoder(input_ids_ko)
-                hidden_states = encoder_output.last_hidden_state
-                decoder_input_ids = tokenizer_ko.encode(tokenizer_ko.cls_token, return_tensors='pt').to(hidden_states.device)  # cls_token 사용
 
-                output_ids = correction_model.decoder.generate(
-                    input_ids=decoder_input_ids,
-                    encoder_hidden_states=hidden_states,
-                    max_new_tokens=50,
-                    num_beams=5,
-                    early_stopping=True
-                )
-                corrected_sentence = tokenizer_ko.decode(output_ids[0], skip_special_tokens=True)
-
+                output = correction_model.generate(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'])
+                corrected_sentence = correction_tokenizer.batch_decode(output, skip_special_tokens=True)[0]
             result = f"The sentence has errors. Suggested correction: {corrected_sentence}"
 
         st.write(result)

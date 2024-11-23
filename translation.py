@@ -13,7 +13,7 @@ from sklearn.metrics import precision_score, f1_score
 from tokenizers import Tokenizer, models, trainers, pre_tokenizers, decoders
 #%%
 # 데이터 전처리
-df_data = pd.read_excel('ko-eng_data.xlsx')
+df_data = pd.read_excel('/data/ko-eng_data.xlsx')
 df_data = df_data.sample(frac=0.1, random_state=42)
 
 df_data = df_data[['한국어', '영어검수']].astype(str)
@@ -158,79 +158,3 @@ print(f'Precision: {precision:.4f}, F1 Score: {f1:.4f}')
 # %%
 # 모델 저장
 torch.save(model.state_dict(), './translation_model')
-# %%
-# Encoder-Decoder 모델 로드
-model = EncoderDecoderModel.from_encoder_decoder_pretrained(
-    'bert-base-multilingual-cased', 'bert-base-multilingual-cased'
-)
-tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
-
-# 데이터셋 수정
-class TextCorrectionDataset(Dataset):
-    def __init__(self, df, tokenizer, max_length=128):
-        self.tokenizer = tokenizer
-        self.inputs = df['한국어'].tolist()
-        self.targets = df['영어'].tolist()
-        self.max_length = max_length
-
-    def __len__(self):
-        return len(self.inputs)
-
-    def __getitem__(self, idx):
-        input_text = self.inputs[idx]
-        target_text = self.targets[idx]
-
-        input_encodings = self.tokenizer(
-            input_text, truncation=True, padding="max_length", max_length=self.max_length, return_tensors="pt"
-        )
-        target_encodings = self.tokenizer(
-            target_text, truncation=True, padding="max_length", max_length=self.max_length, return_tensors="pt"
-        )
-
-        return {
-            "input_ids": input_encodings["input_ids"].squeeze(),
-            "attention_mask": input_encodings["attention_mask"].squeeze(),
-            "labels": target_encodings["input_ids"].squeeze(),
-        }
-
-# 학습 프로세스
-train_dataset = TextCorrectionDataset(train_df, tokenizer)
-train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True)
-
-optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5)
-model.train()
-
-epoch_size = 1
-
-for epoch in range(epoch_size):
-    for batch in train_loader:
-        output = model(input_ids=source_ids, token_type_ids=token_type_ids, attention_mask=attention_mask, labels=labels)
-        loss = output.loss
-        loss.backward()
-        optimizer.step()
-        optimizer.zero_grad()
-
-# 모델 저장
-torch.save(model.state_dict(), "./correction_model.pt")
-
-# %%
-# 모델 평가
-model.eval()
-test_loss = 0
-test_accuracy = 0
-test_y_true = []
-test_y_pred = []
-with torch.no_grad():
-    for source_ids, target_ids, labels in test_loader:
-        output = model(input_ids=source_ids, attention_mask=(source_ids > 0).float(), labels=labels)
-        test_loss += output.loss.item()
-        test_accuracy += (output.logits.argmax(1) == labels).float().mean().item()
-        test_y_true.extend(labels.tolist())
-        test_y_pred.extend(output.logits.argmax(1).tolist())
-
-# Precision 및 F1 Score 계산
-precision = precision_score(test_y_true, test_y_pred, zero_division=1)
-f1 = f1_score(test_y_true, test_y_pred, zero_division=1)
-
-print(f'Test Loss={test_loss/len(test_loader)}, Test Accuracy={test_accuracy/len(test_loader)}')
-print(f'Precision: {precision:.4f}, F1 Score: {f1:.4f}')
