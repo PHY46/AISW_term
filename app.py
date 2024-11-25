@@ -6,11 +6,11 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # 모델과 토크나이저 로드
 translation_model = BertForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
-translation_model.load_state_dict(torch.load('./translation_model', map_location=torch.device('cpu')))
+translation_model.load_state_dict(torch.load('./classification_model', map_location=torch.device('cpu')))
 translation_model.eval()
 
-correction_model = AutoModelForSeq2SeqLM.from_pretrained('correction_model')
-correction_tokenizer = AutoTokenizer.from_pretrained('correction_tokenizer')
+correction_model = AutoModelForSeq2SeqLM.from_pretrained('translation_model')
+correction_tokenizer = AutoTokenizer.from_pretrained('translation_tokenizer')
 
 tokenizer_ko = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 tokenizer_en = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -37,7 +37,7 @@ if st.button("Check"):
             print(similarity_score)
 
         # 예측 결과
-        if similarity_score < 0.3:
+        if similarity_score < 0.4:
             result = "The sentence has no errors."
         else:
             inputs = correction_tokenizer(source_sentence, return_tensors="pt", padding=True, max_length=64, truncation=True)
@@ -46,7 +46,7 @@ if st.button("Check"):
 
                 output = correction_model.generate(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'])
                 corrected_sentence = correction_tokenizer.batch_decode(output, skip_special_tokens=True)[0]
-            result = f"The sentence has errors. Suggested correction: {corrected_sentence}"
+            result = f"The sentence has errors.\nSuggested correction: {corrected_sentence}"
 
         st.write(result)
 

@@ -5,11 +5,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from transformers import BartTokenizer, BartForConditionalGeneration
-from transformers import DataCollatorForSeq2Seq
-from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer
 import numpy as np
-import multiprocessing
-import torch.optim as optim
 from tqdm import tqdm
 from datasets import load_dataset
  
@@ -137,8 +133,8 @@ for epoch in range(epochs):
     print(f'Epoch {epoch + 1}: Val Loss={val_loss/len(val_loader)}, Val Accuracy={val_accuracy/len(val_loader)}')
 
 # 모델 저장
-model.save_pretrained('correction_model')
-tokenizer.save_pretrained('correction_tokenizer')
+model.save_pretrained('translation_model')
+tokenizer.save_pretrained('translation_tokenizer')
 
 # %%
 # BLEU Score 계산
@@ -152,8 +148,8 @@ import pandas as pd
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # 저장된 모델과 토크나이저 불러오기
-model_path = 'correction_model'
-tokenizer_path = 'correction_tokenizer'
+model_path = 'translation_model'
+tokenizer_path = 'translation_tokenizer'
 
 model = AutoModelForSeq2SeqLM.from_pretrained(model_path).to(device)
 tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
@@ -186,7 +182,7 @@ def calculate_bleu(model, tokenizer, dataset, max_length=64):
 
 # 테스트 데이터셋 불러오기
 test_df = pd.read_csv('test_df.csv')
-test_df = test_df.sample(frac=0.01, random_state=42)
+test_df = test_df.sample(frac=0.1, random_state=42)
 
 # BLEU 점수 계산
 bleu_score = calculate_bleu(model, tokenizer, test_df)

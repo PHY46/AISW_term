@@ -1,5 +1,4 @@
-/correction_model.pt
 /translation_model
+/translation_tokenizer
 /data
-/model2
-/tokenizer2
+/classification_model
