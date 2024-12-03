@@ -173,7 +173,7 @@ def calculate_bleu(model, tokenizer, dataset, max_length=64):
             hypothesis = tokenizer.decode(output[0], skip_special_tokens=True)
 
             # 참조와 예측을 리스트에 추가
-            references.append([target_sentence.split()])  # 참고 문장은 리스트로 중첩
+            references.append([target_sentence.split()])
             hypotheses.append(hypothesis.split())
 
     # BLEU 점수 계산

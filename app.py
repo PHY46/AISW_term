@@ -37,7 +37,7 @@ if st.button("Check"):
             print(similarity_score)
 
         # 예측 결과
-        if similarity_score < 0.4:
+        if similarity_score < 0.45:
             result = "The sentence has no errors."
         else:
             inputs = correction_tokenizer(source_sentence, return_tensors="pt", padding=True, max_length=64, truncation=True)
