@@ -1,0 +1,1402 @@
+[
+    {
+        "source": "나는 보통 2시간 동안 운동을 해.",
+        "target": "I usually work out during 2 hours.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "더 많은 정보가 필요하면 링크를 눌러주세요.",
+        "target": "If you need any farther information, feel free to contact me.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "우리 가족은 4명이야.",
+        "target": "My family have 4 members.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그건 당황스러운 상황이었어.",
+        "target": "It was an embarrassed situation.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "우리 가족은 모두 잘 있어.",
+        "target": "My family is all well.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그 위원회는 5명의 멤버로 구성된다.",
+        "target": "The committee is consisted of 5 members.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 내가 한국을 떠날 것이라고 상상도 하지 못했어.",
+        "target": "I never thought that I am going to leave Korea.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 야구 할 줄 알아?",
+        "target": "Can you play the baseball?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그는 좋은 사람이야.",
+        "target": "He is nice person.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 그랑 한달 전에 결혼했어.",
+        "target": "I married with him a month ago.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너는 매우 취했었어.",
+        "target": "You are very drunken.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀의 이마에 피가 흘렀어.",
+        "target": "She had blood in her forehead.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 이제 이 일을 그만두는 것을 찬성해.",
+        "target": "I am in favor to stop work now.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀는 물을 달라고 요청했어.",
+        "target": "She did a request for some water.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "구절을 문자 그대로 번역해줘.",
+        "target": "GIve a literally translation of the passage.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 집에 가고싶어.",
+        "target": "I want to go to home.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 행복해보여?",
+        "target": "Am I look happy?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 그와 시간 보내는 것을 좋아해.",
+        "target": "I like to spend time with he.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "학생 수가 너무 적어.",
+        "target": "The number of students are too small.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "샤워를 안 했어.",
+        "target": "I didn't took a shower.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀는 사과를 좋아해.",
+        "target": "She like an apple.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그는 나의 여동생이야.",
+        "target": "He is not my sister.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 행복해.",
+        "target": "I am happpy.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이거 얼마야?.",
+        "target": "How much was it.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 이거 살거야.",
+        "target": "I buy it",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 물 마실래?.",
+        "target": "Do you wnat drink water?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 연필을 사야해.",
+        "target": "I have buy a pencil.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 너무 슬퍼.",
+        "target": "I is so sad.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "여기에 강아지가 있어.",
+        "target": "Here is an dog.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이건 나의 지갑이 아니야.",
+        "target": "This are not my wallet.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 사과 싫어해.",
+        "target": "I hate a apple.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 엄마랑 마트에 갔어.",
+        "target": "I go mart with mom.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 너의 연필을 사용해도 돼?.",
+        "target": "Can i uses your pencil?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "사진 찍지 마.",
+        "target": "Don't took a picture.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이건 나의 잘못이 아니야.",
+        "target": "It is not your mistake.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너는 할 수 있어.",
+        "target": "You cnd does it.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 7시에 샤워를 할거야.",
+        "target": "I will takes a shower at 7.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀는 양파를 좋아해.",
+        "target": "She like onion.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 항상 아침 6시 30분에 일어나.",
+        "target": "I always got up at 6:30.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이 가게 마음에 안 들어.",
+        "target": "I doesn't like this store.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나 사진 찍는 거 좋아해.",
+        "target": "I enjoy take pictures.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "고양이는 귀여워.",
+        "target": "Cats is cute.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀는 은행에서 일해?",
+        "target": "Do she works at a bank?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 확인해볼게.",
+        "target": "I check it out.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 우리가 길을 잃어버린 것 같아.",
+        "target": "I thinkk we lost.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 공부를 해야 해.",
+        "target": "I had to study.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 공부를 해야 해.",
+        "target": "I have too syudy.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "우리가 만난 적이 있어?",
+        "target": "Have we ever meet before?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "어디에 살아?",
+        "target": "Where do yu live?.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그것은 좋은 뉴스야.",
+        "target": "This is good news.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "철자 오류와 문법 오류는 신뢰성에 영향을 미칠 수 있어.",
+        "target": "Misspellings and grammatical errors can effect your credibility.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "또한 문장을 올바르게 작성하는 방법도 보여줘.",
+        "target": "It will also showed you how to correctly write the sentence.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 버스 출발 시간 때문에 지금 가야 해.",
+        "target": "I have to go now because the departure time of the bus.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "무슨 일이야?",
+        "target": "What's go on?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "훨씬 낫다.",
+        "target": "More better.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "물어봐줘서 고마워.",
+        "target": "Thank you for ask.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이건 용납 못 해.",
+        "target": "This unacceptable.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "정말 그걸 듣고싶어?",
+        "target": "Do you sure you want to hear?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "새 친구가 나타날거야.",
+        "target": "It can be your new new friend.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이제 순식간에 새 친구가 생길거야.",
+        "target": "You will making a frien any minute now.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "뭐라고 하는거야?",
+        "target": "What are they say about?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "더 나이 들어 보이게 할 수 있을까?",
+        "target": "Could we maker look old?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이제 청소를 하자.",
+        "target": "Now, let's cleaning up this place.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "우리가 보고 있었어.",
+        "target": "We were watch.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이제 이 말을 하고 싶어.",
+        "target": "Now I have to say this.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "큰 실수가 있었어요.",
+        "target": "There's been an big mistake.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "제 책상이 어디죠?",
+        "target": "Where is my desk?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "당신의 직업이 뭐였죠?",
+        "target": "What is your job?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "무엇을 위해 사용할 건가요?",
+        "target": "What are you gonna use it to?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나에게 직업이 없어.",
+        "target": "There are no job for me.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "샐리는 일 때문에 거기에 있어.",
+        "target": "Sally is there about one.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "삼키지 않을건가요?",
+        "target": "Are you going to swallow that?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀에게 무슨 문제가 있나요?",
+        "target": "What's wrong with you?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 네 코트를 가져올게.",
+        "target": "I got your coat.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 노트북 화면을 닫았다.",
+        "target": "I close up the laptop computer screen.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀에게 읽어주는 거 어때?.",
+        "target": "Why don't you read it to him?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그게 나오길 바라고 있었어.",
+        "target": "I was hoping to that would come up.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "무슨 생각 하고 있었어?",
+        "target": "What are you thinking?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "비가 내리고 있어.",
+        "target": "It is rain.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 지금이 최적의 시기가 아닌 것 같아.",
+        "target": "I don't think this is best time.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "무슨 말이야?",
+        "target": "What do you talking about?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "정말 안 갈 거야?",
+        "target": "Are not you really going?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "저를 만나 주셔서 감사합니다.",
+        "target": "Thanks for meeting I.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "괜찮습니다. 비록 당신이 제 바쁜 하루에 끼어들긴 했지만요.",
+        "target": "That's all right, although you did cut into my busy day.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "앉으시겠어요?",
+        "target": "Do you wanna sit?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀는 아직도 당신과 함께 있어요?",
+        "target": "She is still be with you?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "오늘 오후에 부모님이 안 오시겠다고 전화를 주셨어요.",
+        "target": "My parents called this afternoon to say they aren't coming.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그것들을 볼래?",
+        "target": "Would you look them?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "지금은 좀 외롭다고 느껴져.",
+        "target": "Now i just felt kind of alone.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "미안하지만 안 좋은 소식이 있어.",
+        "target": "I'm afraid I have some badd news.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "믿을 수 없어.",
+        "target": "No believe.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": ".먼저, 연필을 뺏을래",
+        "target": "First, I'm gonna take you pencil.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너는 그거 그와 같이 하기로 했잖아.",
+        "target": "You're supposed to do it with he.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "3시까지 끝내야 해요.",
+        "target": "I need to done by 3.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그때 아빠가 나를 데리러 와.",
+        "target": "That's when my dad pick me up.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "창피해 하지 마세요.",
+        "target": "Don't be embarrassing.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "저도 항상 그래요.",
+        "target": "I am too all the time.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "정말 죄송해요, 일부러 그런건 아니에요.",
+        "target": "I'm so story, I didn't mean it.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너의 자전거를 찾았어.",
+        "target": "I find your bike.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "오늘밤 뉴스에서 볼 수 있을거야.",
+        "target": "You'll see on the tonight news.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "조금 더 멀리.",
+        "target": "Just bit further.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "바람이 불어서 내 모자가 날아갔어.",
+        "target": "The wind has blow my hat off.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 나무를 약간 흔들어볼게.",
+        "target": "I'm give the tree a little shake.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "네가 가장 좋아하는 게임은 뭐야?",
+        "target": "Your favorite is what?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "네가 무슨 말하는지 모르겠어.",
+        "target": "I have no idea what you to say.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "좋아하는 계절이 뭐야?",
+        "target": "What is your favorite seasons.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 놀란 척 하는 게 좋겠어.",
+        "target": "You'd better to act surprised.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "병원에 가봐.",
+        "target": "You should go a doctor.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "어디가 아파?",
+        "target": "Where does it hurts?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "시험이 언제야?",
+        "target": "When is the test?",
+        "error": [
+            0
+        ]
+    },
+    {
+        "source": "나 너무 졸려.",
+        "target": "I'm so sleep.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "잘못 보냈어.",
+        "target": "I send it wrong.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이름을 착각했어.",
+        "target": "I got the wrong name.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "오늘 날씨가 좋아.",
+        "target": "Today weather is nice.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 생일이 언제야?",
+        "target": "When does your birthday?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내 생일은 4월 6일이야.",
+        "target": "I birthday is april 6th.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "오늘이 무슨 요일이야?",
+        "target": "What day is today?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "오늘은 금요일이야.",
+        "target": "Today is a friday.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "네가 기억을 못 했으면 좋겠어.",
+        "target": "I like you wouldn't remember.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내일은 쉬는 날이야.",
+        "target": "Tomorrow will my day off.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내일은 학교에 안 가.",
+        "target": "I'm not go to school tomorrow.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나한테 연락이 왔어.",
+        "target": "I get a call.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너무 더워서 걷고싶지않아.",
+        "target": "It's so hot that I don't want walk.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "오늘 우리 점심 뭐 먹을래?",
+        "target": "What you want to eat for lunch today?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "시간이 없으니까 간단하게 먹자.",
+        "target": "We don't have time, .",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나 대신 해 줘.",
+        "target": "Do it instead me.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 이거 필요해?",
+        "target": "Are you need this?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 항상 늦게 일어.",
+        "target": "I'm always wake up late.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "누가 먼저 할래?",
+        "target": "Who want to go first?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "짐이 너무 많아.",
+        "target": "I have too many luggage.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "조금 늦을 것 같아.",
+        "target": "I think I am a little late.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "기다리고 있었어.",
+        "target": "I was wait for you.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "수업이 언제 끝날까?",
+        "target": "When will the class ends?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "수업이 너무 어려워.",
+        "target": "The class is too difficult.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "빵 먹으러 가자.",
+        "target": "Let's go eat bread.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "와서 간식 먹어.",
+        "target": "Come eat a snack.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나랑 영화 보러 갈래?",
+        "target": "Do you want to see a movie with me?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "어제 개봉한 그 영화 보고 싶어.",
+        "target": "I want to watch the movie that released yesterday.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 저 남자 이름 알아?",
+        "target": "Does you know his name?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "어디로 갈까요?",
+        "target": "Let's go where?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "안 좋은 냄새가 나.",
+        "target": "The smells bad",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "창문을 열까?",
+        "target": "I open the window?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "바람이 많이 불어.",
+        "target": "It's many wind.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그것들은 우리 피부의 기름도 제거하고 냉각 효과도 있어.",
+        "target": "They remove oil from our skin and have a cool effect.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그럼 버리면 안 되겠네.",
+        "target": " Then I shouldn’t throw them away.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "가격이 얼마인가요?",
+        "target": "How much the cost?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이거 몇시에 시작해?",
+        "target": "What time it starts?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "5시에 시작해.",
+        "target": "It start at 5.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "새 자전거 헬멧이 필요해.",
+        "target": "I like to get new bicycle helmet.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "네가 가지고 있는 건 뭐가 문제야?",
+        "target": "What is the problem with one you have?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "헬멧이 너무 작아.",
+        "target": "My helmet feels to tight.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "매사에 그렇게 심각하게 여기지 마.",
+        "target": "Stop taking everything so serious.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "할 말이 있어요.",
+        "target": "There is something tell you.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "네가 말한 거에 대해 많이 생각해봤어.",
+        "target": "I've been think a lot about what you said.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이 이야기는 그만하자.",
+        "target": "We are done talk about this.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 보기에 그가 사실을 말하는 것 같아.",
+        "target": "I think he is telling the true.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "물론 자랑하려고 하는 건 아니야.",
+        "target": "Nothing brag ever about, of course.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "더 좋은 선택이라고 생각했어.",
+        "target": "It just seemed like a more good option.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "난 얘기할 게 없어.",
+        "target": "There are nothing to tell.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그는 그냥 나랑 같이 일 하는 사람이야.",
+        "target": "He is just some guy work with me.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그녀는 오늘 짐 챙겨서 떠났어.",
+        "target": "She today moved her stuff out.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "다리에 감각이 없어.",
+        "target": "I cannot feel my legs.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너 어떻게 버텼어?",
+        "target": "How did you get through it?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "한시간밖에 안 걸렸어.",
+        "target": "That only took a hour.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이게 핵심은 아냐.",
+        "target": "I don't think that was my point.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "제일 무서운 게 뭔지 알아?",
+        "target": "You know what the scariest part?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "다섯번째 데이트 하는거야?",
+        "target": "There is gonna be a fiveth date?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "자꾸 웃음이 나와.",
+        "target": "I can't stop smile.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이 도시에 처음 왔던 때가 생각나.",
+        "target": "I remember when I first come to this city.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "아는 사람은 아무도 없었어.",
+        "target": "I didn't know nobody.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이것 좀 저 사람한테 전해줄래?",
+        "target": "Could you give this to guy over there?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그가 왜 나한테 전화를 해?",
+        "target": "Why does he going to call me?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "고등학교 때 기억나?",
+        "target": "Remember when we are in highschool?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "이게 잘못됐다고 생각해?",
+        "target": "Do you think that is wrong?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너희가 정말 보고 싶을거래.",
+        "target": "He said he really gonna miss you guys.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "너희들 여기 웬일이야?",
+        "target": "What are you guys here?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "친구들과는 잘 놀았어?",
+        "target": "How was with your friends?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그게 이상한가봐.",
+        "target": "That is a unusual activity.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내가 그를 사랑하지 않았다는 거 알아.",
+        "target": "I know I don't love him.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내 말이 그 말이야.",
+        "target": "That is what I say.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "네가 여기 청소했어?",
+        "target": "You cleaned up in here?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "도착하면 연락해.",
+        "target": "Call me when you arrive.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "들어가도 될까?",
+        "target": "May I go?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "밤을 새웠어.",
+        "target": "I stay up all night.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "여기 어디야?",
+        "target": "Where is here?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "저희는 4명입니다.",
+        "target": "We are four.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "그는 죽었어요.",
+        "target": "He was died.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "엄마랑 전화했어.",
+        "target": "I called with my mom.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "다시 잠 자러 가.",
+        "target": "Sleep again.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "부모님께.",
+        "target": "Dear my parents.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "저는 직원이에요.",
+        "target": "I am a staff.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "먼저 가세요.",
+        "target": "You go first.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "숙제가 너무 많다.",
+        "target": "I have many homework.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "돈 좀 빌릴 수 있을까?",
+        "target": "Can you borrow some money?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "다른 게 뭐야?",
+        "target": "What is different?",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나 여기 좋아.",
+        "target": "I like here.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나는 면접 준비 중이야.",
+        "target": "I am preparing a job interview.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "내 친구 잘 챙겨줘.",
+        "target": "Take care my friend.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "10분 내로 갈게요.",
+        "target": "I will there in 10 minutes.",
+        "error": [
+            1
+        ]
+    },
+    {
+        "source": "나 지금 가고있어.",
+        "target": "I am going.",
+        "error": [
+            1
+        ]
+    }
+]
