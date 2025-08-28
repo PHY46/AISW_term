@@ -1,3 +1,4 @@
 /translation_model
 /translation_tokenizer
 /classification_model
+/data/*.xlsx

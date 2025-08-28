@@ -3,13 +3,13 @@
 
 ## 의미 동일성 검사 모델
 사용 데이터
-- 의미가 동일한 데이터 : AI hub의 한국어-영어 번역 말뭉치 데이터셋의 뉴스, 한국문화, 구어체, 대화체 중 400개 문장쌍
+- 의미가 동일한 데이터 : [AI hub 한국어-영어 번역 말뭉치 데이터셋](https://www.aihub.or.kr/aihubdata/data/view.do?pageIndex=1&currMenu=115&topMenu=100&srchOptnCnd=OPTNCND001&searchKeyword=%ED%95%9C%EA%B5%AD%EC%96%B4-%EC%98%81%EC%96%B4+%EB%B2%88%EC%97%AD+%EB%A7%90%EB%AD%89%EC%B9%98&srchDetailCnd=DETAILCND001&srchOrder=ORDER001&srchPagePer=20&aihubDataSe=data&dataSetSn=126)의 뉴스, 한국문화, 구어체, 대화체 중 400개 문장쌍
 - 의미가 다르거나 문법 오류가 있는 데이터 : 미국 영화 번역 대본 등을 참고해 200개 문장쌍 직접 생성
 
 사용 모델 : [bert-base-multilingual](https://huggingface.co/google-bert/bert-base-multilingual-cased)
 
 ## 한영 번역 모델
-사용 데이터 : AI hub의 한국어-영어 번역 말뭉치 데이터셋의 뉴스, 한국문화, 구어체, 대화체 중 50,000개 문장쌍
+사용 데이터 : AI hub 한국어-영어 번역 말뭉치 데이터셋의 뉴스, 한국문화, 구어체, 대화체 중 50,000개 문장쌍
 
 사용 모델 : [bart-base](https://huggingface.co/facebook/bart-base)
 
