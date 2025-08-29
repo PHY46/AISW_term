@@ -1268,7 +1268,7 @@
     },
     {
         "source": "도착하면 연락해.",
-        "target": "Call me when you arrive.",
+        "target": "Call me if you arrive.",
         "error": [
             1
         ]

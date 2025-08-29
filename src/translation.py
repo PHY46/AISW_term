@@ -12,12 +12,14 @@ from datasets import load_dataset
 # %%
 df = pd.DataFrame(columns = ['원문','번역문'])
 
-file_list = [ '/content/1_구어체(1).xlsx',
- '/content/1_구어체(2).xlsx',
- '/content/2_대화체.xlsx',
- '/content/3_문어체_뉴스(2).xlsx',
- '/content/3_문어체_뉴스(3).xlsx',
- '/content/4_문어체_한국문화.xlsx']
+file_list = [
+    'data/1_구어체(1).xlsx',
+    'data/1_구어체(2).xlsx',
+    'data/2_대화체.xlsx',
+    'data/3_문어체_뉴스(2).xlsx',
+    'data/3_문어체_뉴스(3).xlsx',
+    'data/4_문어체_한국문화.xlsx',
+]
 
 for data in file_list:
     temp = pd.read_excel(data)
@@ -81,8 +83,8 @@ batch_size = 16
 epochs = 5
 
 # 데이터셋 준비
-src_sentences = df['원문'].tolist()  # 한국어 열
-trg_sentences = df['번역문'].tolist()  # 영어 열
+src_sentences = df['원문'].tolist()
+trg_sentences = df['번역문'].tolist()
 
 train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
 train_df, val_df = train_test_split(train_df, test_size=0.2, random_state=42)
@@ -95,7 +97,6 @@ train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-# 옵티마이저 설정
 optimizer = torch.optim.Adam(model.parameters(), lr=2e-5)
 
 # 학습 루프
@@ -108,7 +109,6 @@ for epoch in range(epochs):
         attention_mask = batch['attention_mask'].to(device)
         labels = batch['labels'].to(device)
 
-        # Forward pass
         outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
         loss = outputs.loss
         loss.backward()
@@ -122,7 +122,7 @@ for epoch in range(epochs):
         for batch in val_loader:
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
-            labels = batch['labels'].to(device)  # Include labels for loss computation
+            labels = batch['labels'].to(device)
 
             outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
             val_loss += outputs.loss.item()
@@ -137,14 +137,12 @@ model.save_pretrained('translation_model')
 tokenizer.save_pretrained('translation_tokenizer')
 
 # %%
-# BLEU Score 계산
 import torch
 from tqdm import tqdm
 from nltk.translate.bleu_score import corpus_bleu
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import pandas as pd
 
-# 디바이스 설정
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # 저장된 모델과 토크나이저 불러오기
@@ -165,18 +163,14 @@ def calculate_bleu(model, tokenizer, dataset, max_length=64):
             source_sentence = row['원문']
             target_sentence = row['번역문']
 
-            # 입력 토큰화
             inputs = tokenizer(source_sentence, return_tensors="pt", padding=True, truncation=True, max_length=max_length).to(device)
 
-            # 모델 번역 생성
             output = model.generate(input_ids=inputs['input_ids'], attention_mask=inputs['attention_mask'], max_length=max_length)
             hypothesis = tokenizer.decode(output[0], skip_special_tokens=True)
 
-            # 참조와 예측을 리스트에 추가
             references.append([target_sentence.split()])
             hypotheses.append(hypothesis.split())
 
-    # BLEU 점수 계산
     bleu_score = corpus_bleu(references, hypotheses)
     return bleu_score
 
@@ -184,6 +178,5 @@ def calculate_bleu(model, tokenizer, dataset, max_length=64):
 test_df = pd.read_csv('test_df.csv')
 test_df = test_df.sample(frac=0.1, random_state=42)
 
-# BLEU 점수 계산
 bleu_score = calculate_bleu(model, tokenizer, test_df)
 print(f"BLEU Score: {bleu_score}")
